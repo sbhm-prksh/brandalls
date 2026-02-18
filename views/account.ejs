@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>My Account</h1>
+    <p>Shop profile details.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="card">
+      <h3><%= user.shop_name %></h3>
+      <p class="muted">Owner: <%= user.owner_name %></p>
+      <p class="muted">Email: <%= user.email %></p>
+    </div>
+  </div>
+</section>
+<%- include('partials/footer') %>

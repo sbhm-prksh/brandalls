@@ -82,6 +82,14 @@ function requireLogin(req, res, next) {
   next();
 }
 
+function requireShop(req, res, next) {
+  if (!req.session.user || req.session.user.role !== 'shop') {
+    setFlash(req, 'error', 'Shop owner access required.');
+    return res.redirect('/');
+  }
+  next();
+}
+
 function requireAdmin(req, res, next) {
   if (!req.session.user || req.session.user.role !== 'admin') {
     setFlash(req, 'error', 'Admin access required.');
@@ -253,7 +261,7 @@ app.get('/medicines', async (req, res) => {
   res.render('medicines', { title: 'Medicines - Brandall Brands', products, search: req.query.search || '' });
 });
 
-app.post('/cart/add', requireLogin, async (req, res) => {
+app.post('/cart/add', requireShop, async (req, res) => {
   const productId = parseInt(req.body.product_id, 10);
   const quantity = parseInt(req.body.quantity || '1', 10);
   const product = await dbGet('SELECT * FROM products WHERE id = ?', [productId]);
@@ -273,7 +281,7 @@ app.post('/cart/add', requireLogin, async (req, res) => {
   res.redirect('/medicines');
 });
 
-app.get('/cart', requireLogin, async (req, res) => {
+app.get('/cart', requireShop, async (req, res) => {
   const cart = req.session.cart || { items: [] };
   const productIds = cart.items.map((item) => item.productId);
   let products = [];
@@ -294,7 +302,7 @@ app.get('/cart', requireLogin, async (req, res) => {
   res.render('cart', { title: 'Your Cart', items: detailedItems, total });
 });
 
-app.post('/cart/update', requireLogin, (req, res) => {
+app.post('/cart/update', requireShop, (req, res) => {
   const updates = Array.isArray(req.body.quantity)
     ? req.body.quantity
     : [req.body.quantity];
@@ -315,7 +323,7 @@ app.post('/cart/update', requireLogin, (req, res) => {
   res.redirect('/cart');
 });
 
-app.post('/orders/place', requireLogin, async (req, res) => {
+app.post('/orders/place', requireShop, async (req, res) => {
   const cart = req.session.cart || { items: [] };
   if (!cart.items.length) {
     setFlash(req, 'error', 'Your cart is empty.');
@@ -374,6 +382,40 @@ app.post('/orders/place', requireLogin, async (req, res) => {
     total,
     whatsappLink: buildWhatsAppLink(orderId, items, total)
   });
+});
+
+app.get('/account', requireShop, (req, res) => {
+  res.render('account', { title: 'My Account' });
+});
+
+app.get('/orders', requireShop, async (req, res) => {
+  const orders = await dbAll(
+    `SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC`,
+    [req.session.user.id]
+  );
+  res.render('orders', { title: 'My Orders', orders });
+});
+
+app.get('/orders/:id', requireShop, async (req, res) => {
+  const order = await dbGet(
+    `SELECT * FROM orders WHERE id = ? AND user_id = ?`,
+    [req.params.id, req.session.user.id]
+  );
+  if (!order) {
+    setFlash(req, 'error', 'Order not found.');
+    return res.redirect('/orders');
+  }
+  const items = await dbAll(
+    `SELECT order_items.*, products.name FROM order_items
+     JOIN products ON order_items.product_id = products.id
+     WHERE order_items.order_id = ?`,
+    [req.params.id]
+  );
+  const whatsappLink = buildWhatsAppLink(order.id, items.map((item) => ({
+    product: { name: item.name },
+    quantity: item.quantity
+  })), order.total_price);
+  res.render('order_detail', { title: `Order #${order.id}`, order, items, whatsappLink });
 });
 
 function buildWhatsAppLink(orderId, items, total) {

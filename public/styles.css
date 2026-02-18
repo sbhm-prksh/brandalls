@@ -90,6 +90,61 @@ a {
   flex-wrap: wrap;
 }
 
+.account-menu {
+  position: relative;
+}
+
+.account-toggle {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--blue-700);
+  color: var(--white);
+  font-weight: 700;
+  box-shadow: var(--glow);
+}
+
+.account-dropdown {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 10px;
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid rgba(15, 94, 166, 0.12);
+  z-index: 30;
+}
+
+.account-dropdown a {
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.account-dropdown a:hover {
+  background: var(--blue-100);
+  color: var(--blue-900);
+}
+
+.account-menu.is-open .account-dropdown {
+  display: flex;
+}
+
 .nav-links a {
   font-weight: 600;
   color: var(--gray-700);
@@ -191,6 +246,7 @@ a {
   right: -120px;
   top: -60px;
   z-index: 0;
+  pointer-events: none;
 }
 
 .hero-grid {
@@ -198,6 +254,8 @@ a {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -594,6 +652,44 @@ a {
 .muted {
   color: var(--gray-700);
   font-size: 14px;
+}
+
+body.admin {
+  background: linear-gradient(180deg, #0b1f38 0%, #0a1629 100%);
+  color: var(--white);
+}
+
+body.admin .site-header {
+  background: rgba(6, 20, 40, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.admin .nav-links a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+body.admin .nav-links a:hover {
+  color: var(--blue-200);
+}
+
+body.admin .card,
+body.admin .table-card,
+body.admin .form-card,
+body.admin .info-box,
+body.admin .order-summary,
+body.admin .product-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--white);
+}
+
+body.admin .page-hero,
+body.admin .section-alt {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+body.admin .site-footer {
+  background: #061428;
 }
 
 @media (max-width: 900px) {

@@ -22,11 +22,26 @@
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
     const header = document.querySelector('.site-header');
+    const accountToggle = document.querySelector('.account-toggle');
+    const accountMenu = document.querySelector('.account-menu');
     if (navToggle && navLinks && header) {
       navToggle.addEventListener('click', () => {
         const isOpen = navLinks.classList.toggle('is-open');
         header.classList.toggle('nav-open', isOpen);
         navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
+
+    if (accountToggle && accountMenu) {
+      accountToggle.addEventListener('click', () => {
+        const isOpen = accountMenu.classList.toggle('is-open');
+        accountToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      document.addEventListener('click', (event) => {
+        if (!accountMenu.contains(event.target)) {
+          accountMenu.classList.remove('is-open');
+          accountToggle.setAttribute('aria-expanded', 'false');
+        }
       });
     }
   </script>

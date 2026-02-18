@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>My Orders</h1>
+    <p>Recent wholesale orders.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Order</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (orders.length === 0) { %>
+            <tr>
+              <td colspan="5">No orders yet.</td>
+            </tr>
+          <% } %>
+          <% orders.forEach(order => { %>
+            <tr>
+              <td>#<%= order.id %></td>
+              <td>₹<%= order.total_price.toFixed(2) %></td>
+              <td><span class="status <%= order.status.toLowerCase() %>"><%= order.status %></span></td>
+              <td><%= order.created_at %></td>
+              <td><a class="btn btn-small" href="/orders/<%= order.id %>">View</a></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<%- include('partials/footer') %>
