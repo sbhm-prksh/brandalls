@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>Contact Messages</h1>
+    <p>Inbound requests from the public website.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Message</th>
+            <th>Received</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (messages.length === 0) { %>
+            <tr>
+              <td colspan="5">No messages yet.</td>
+            </tr>
+          <% } %>
+          <% messages.forEach(msg => { %>
+            <tr>
+              <td><%= msg.name %></td>
+              <td><%= msg.email %></td>
+              <td><%= msg.phone || '-' %></td>
+              <td><%= msg.message %></td>
+              <td><%= msg.created_at %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

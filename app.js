@@ -550,6 +550,13 @@ app.get('/admin/users', requireAdmin, async (req, res) => {
   res.render('admin/users', { title: 'Registered Shops', users });
 });
 
+app.get('/admin/messages', requireAdmin, async (req, res) => {
+  const messages = await dbAll(
+    `SELECT * FROM contacts ORDER BY created_at DESC`
+  );
+  res.render('admin/messages', { title: 'Contact Messages', messages });
+});
+
 app.listen(PORT, () => {
   console.log(`Brandall Brands MVP running on http://localhost:${PORT}`);
 });

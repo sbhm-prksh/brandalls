@@ -25,35 +25,34 @@
         <span></span>
       </button>
       <nav class="nav-links">
-        <a href="/about">About</a>
-        <a href="/services">Services</a>
-        <a href="/contact">Contact</a>
-        <a href="/medicines">Medicines</a>
         <% if (user && user.role === 'admin') { %>
-          <a href="/admin">Admin</a>
-        <% } %>
-        <% if (user) { %>
-          <% if (user.role !== 'admin') { %>
+          <a href="/admin">Dashboard</a>
+          <a href="/admin/products">Products</a>
+          <a href="/admin/orders">Orders</a>
+          <a href="/admin/users">Users</a>
+          <a href="/admin/messages">Messages</a>
+          <a href="/logout">Logout</a>
+        <% } else { %>
+          <a href="/about">About</a>
+          <a href="/services">Services</a>
+          <a href="/contact">Contact</a>
+          <a href="/medicines">Medicines</a>
+          <% if (user) { %>
             <a href="/cart">Cart</a>
-          <% } %>
-          <div class="account-menu">
-            <button class="account-toggle" type="button" aria-label="Account menu" aria-expanded="false">
-              <span class="avatar"><%= (user.owner_name || user.shop_name || 'U').slice(0,1).toUpperCase() %></span>
-            </button>
-            <div class="account-dropdown">
-              <% if (user.role !== 'admin') { %>
+            <div class="account-menu">
+              <button class="account-toggle" type="button" aria-label="Account menu" aria-expanded="false">
+                <span class="avatar"><%= (user.owner_name || user.shop_name || 'U').slice(0,1).toUpperCase() %></span>
+              </button>
+              <div class="account-dropdown">
                 <a href="/account">My Account</a>
                 <a href="/orders">My Orders</a>
-              <% } else { %>
-                <a href="/admin">Admin Dashboard</a>
-                <a href="/admin/orders">Manage Orders</a>
-              <% } %>
-              <a href="/logout">Logout</a>
+                <a href="/logout">Logout</a>
+              </div>
             </div>
-          </div>
-        <% } else { %>
-          <a href="/login">Login</a>
-          <a class="btn btn-small" href="/register">Register</a>
+          <% } else { %>
+            <a href="/login">Login</a>
+            <a class="btn btn-small" href="/register">Register</a>
+          <% } %>
         <% } %>
       </nav>
     </div>
