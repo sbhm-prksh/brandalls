@@ -156,6 +156,10 @@ a {
   min-height: 70vh;
 }
 
+.nav-toggle {
+  display: none;
+}
+
 .hero {
   padding: 70px 0 48px;
   position: relative;
@@ -577,6 +581,21 @@ a {
   font-size: 14px;
 }
 
+@media (max-width: 900px) {
+  .hero-grid {
+    gap: 22px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
+  .highlight {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-wrapper {
     flex-direction: column;
@@ -588,13 +607,116 @@ a {
     gap: 10px;
   }
 
+  .hero {
+    padding: 56px 0 36px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   .search-bar {
     flex-direction: column;
   }
 
+  .search-bar input,
+  .search-bar button {
+    width: 100%;
+  }
+
+  .product-meta {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .inline-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inline-form input,
+  .inline-form button {
+    width: 100%;
+  }
+
+  .table-card {
+    padding: 12px;
+  }
+
+  .table-card th,
+  .table-card td {
+    padding: 8px 6px;
+    font-size: 14px;
+  }
+
   .cart-actions {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 10px;
+  }
+
+  .order-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .status-form {
+    width: 100%;
+  }
+
+  .status-form select,
+  .status-form button {
+    width: 100%;
+  }
+
+  .site-footer {
+    padding: 28px 0 18px;
+  }
+}
+
+@media (max-width: 520px) {
+  .brand {
+    width: 100%;
+  }
+
+  .brand-tagline {
+    font-size: 11px;
+  }
+
+  .nav-links a,
+  .nav-links .btn {
+    width: 100%;
+    text-align: left;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .card,
+  .form-card,
+  .table-card,
+  .product-card,
+  .order-summary {
+    border-radius: 14px;
+  }
+
+  .product-image {
+    height: 120px;
+  }
+
+  .product-image img {
+    height: 120px;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-outline {
+    width: 100%;
+    justify-content: center;
   }
 }
