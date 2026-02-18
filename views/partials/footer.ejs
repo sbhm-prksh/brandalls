@@ -21,9 +21,11 @@
   <script>
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    if (navToggle && navLinks) {
+    const header = document.querySelector('.site-header');
+    if (navToggle && navLinks && header) {
       navToggle.addEventListener('click', () => {
         const isOpen = navLinks.classList.toggle('is-open');
+        header.classList.toggle('nav-open', isOpen);
         navToggle.setAttribute('aria-expanded', String(isOpen));
       });
     }
