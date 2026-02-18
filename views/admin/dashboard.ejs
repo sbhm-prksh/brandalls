@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <p>Overview of your wholesale operations.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cards">
+    <div class="card">
+      <h3>Registered Shops</h3>
+      <p class="metric"><%= stats.users %></p>
+    </div>
+    <div class="card">
+      <h3>Total Orders</h3>
+      <p class="metric"><%= stats.orders %></p>
+    </div>
+    <div class="card">
+      <h3>Products</h3>
+      <p class="metric"><%= stats.products %></p>
+    </div>
+  </div>
+  <div class="container admin-actions">
+    <a class="btn" href="/admin/products">Manage Products</a>
+    <a class="btn btn-outline" href="/admin/orders">Manage Orders</a>
+    <a class="btn btn-outline" href="/admin/users">View Users</a>
+  </div>
+</section>
+<%- include('../partials/footer') %>

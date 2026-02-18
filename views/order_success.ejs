@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>Order Placed Successfully</h1>
+    <p>Your order has been received. We will confirm shortly.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="order-summary">
+      <h3>Order #<%= orderId %></h3>
+      <ul>
+        <% items.forEach(item => { %>
+          <% if (item.product) { %>
+            <li><%= item.product.name %> x <%= item.quantity %> — ₹<%= item.lineTotal.toFixed(2) %></li>
+          <% } %>
+        <% }) %>
+      </ul>
+      <div class="total">Total: ₹<%= total.toFixed(2) %></div>
+      <a class="btn btn-outline" href="<%= whatsappLink %>" target="_blank" rel="noopener">Send on WhatsApp</a>
+    </div>
+  </div>
+</section>
+<%- include('partials/footer') %>

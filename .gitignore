@@ -1,0 +1,22 @@
+node_modules/
+*.log
+
+# SQLite databases
+*.db
+*.db-journal
+*.sqlite
+*.sqlite-journal
+
+# Session store
+sessions.db
+sessions.db-journal
+
+# Uploads (keep folder)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

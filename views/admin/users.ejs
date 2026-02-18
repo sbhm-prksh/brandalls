@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>Registered Shops</h1>
+    <p>Review active wholesale customers.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Shop</th>
+            <th>Owner</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>GST</th>
+            <th>Joined</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(user => { %>
+            <tr>
+              <td><%= user.shop_name %></td>
+              <td><%= user.owner_name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.phone %></td>
+              <td><%= user.gst %></td>
+              <td><%= user.created_at %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

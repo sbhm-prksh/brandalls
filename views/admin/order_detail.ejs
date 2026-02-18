@@ -1,0 +1,46 @@
+<%- include('../partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>Order #<%= order.id %></h1>
+    <p><%= order.shop_name %> • <%= order.email %></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Medicine</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% items.forEach(item => { %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= item.quantity %></td>
+              <td>₹<%= item.price.toFixed(2) %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="order-actions">
+      <div class="total">Total: ₹<%= order.total_price.toFixed(2) %></div>
+      <form method="post" action="/admin/orders/<%= order.id %>/status" class="status-form">
+        <select name="status">
+          <option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+          <option value="Confirmed" <%= order.status === 'Confirmed' ? 'selected' : '' %>>Confirmed</option>
+          <option value="Dispatched" <%= order.status === 'Dispatched' ? 'selected' : '' %>>Dispatched</option>
+        </select>
+        <button class="btn btn-small" type="submit">Update Status</button>
+      </form>
+      <a class="btn btn-outline" href="<%= whatsappLink %>" target="_blank" rel="noopener">WhatsApp Summary</a>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

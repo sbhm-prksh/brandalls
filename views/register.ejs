@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>Register Your Medical Shop</h1>
+    <p>Create an account to access wholesale pricing and order online.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <form class="form-card" method="post" action="/register">
+      <label>
+        Shop Name
+        <input type="text" name="shop_name" required />
+      </label>
+      <label>
+        Owner Name
+        <input type="text" name="owner_name" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required />
+      </label>
+      <label>
+        Phone
+        <input type="text" name="phone" required />
+      </label>
+      <label>
+        GST Number
+        <input type="text" name="gst" required />
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" required />
+      </label>
+      <button class="btn" type="submit">Create Account</button>
+    </form>
+  </div>
+</section>
+<%- include('partials/footer') %>

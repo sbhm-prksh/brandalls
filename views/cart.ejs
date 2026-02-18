@@ -1,0 +1,53 @@
+<%- include('partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>Your Cart</h1>
+    <p>Review quantities before placing your order.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <% if (items.length === 0) { %>
+      <p>Your cart is empty.</p>
+    <% } else { %>
+      <form method="post" action="/cart/update" class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Medicine</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Line Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% items.forEach(item => { %>
+              <tr>
+                <td>
+                  <%= item.product ? item.product.name : 'Unknown product' %>
+                  <input type="hidden" name="product_id" value="<%= item.product ? item.product.id : '' %>" />
+                </td>
+                <td>₹<%= item.product ? item.product.price.toFixed(2) : '0.00' %></td>
+                <td>
+                  <input type="number" name="quantity" min="0" value="<%= item.quantity %>" />
+                </td>
+                <td>₹<%= item.lineTotal.toFixed(2) %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <div class="cart-actions">
+          <div class="total">Total: ₹<%= total.toFixed(2) %></div>
+          <div>
+            <button class="btn btn-outline" type="submit">Update Cart</button>
+          </div>
+        </div>
+      </form>
+      <form method="post" action="/orders/place" class="place-order">
+        <button class="btn" type="submit">Place Order</button>
+      </form>
+    <% } %>
+  </div>
+</section>
+<%- include('partials/footer') %>

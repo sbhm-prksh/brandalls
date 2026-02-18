@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>Manage Products</h1>
+    <p>Add, edit, or remove medicines from your catalogue.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <a class="btn" href="/admin/products/new">Add Medicine</a>
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Expiry</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(product => { %>
+            <tr>
+              <td><%= product.name %></td>
+              <td><%= product.brand %></td>
+              <td>₹<%= product.price.toFixed(2) %></td>
+              <td><%= product.stock_qty %></td>
+              <td><%= product.expiry_date %></td>
+              <td class="actions">
+                <a class="btn btn-small" href="/admin/products/<%= product.id %>/edit">Edit</a>
+                <form method="post" action="/admin/products/<%= product.id %>/delete" onsubmit="return confirm('Delete this product?')">
+                  <button class="btn btn-small btn-outline" type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

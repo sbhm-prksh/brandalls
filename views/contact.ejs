@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>Get quick wholesale support.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split">
+    <form class="form-card" method="post" action="/contact">
+      <label>
+        Name *
+        <input type="text" name="name" required />
+      </label>
+      <label>
+        Email *
+        <input type="email" name="email" required />
+      </label>
+      <label>
+        Phone
+        <input type="text" name="phone" />
+      </label>
+      <label>
+        Message *
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button class="btn" type="submit">Send Message</button>
+    </form>
+    <div class="info-box">
+      <h3>Direct Lines</h3>
+      <p>Email: sales@brandall.com</p>
+      <p>Phone: +91 90000 00000</p>
+      <p>Warehouse: Hyderabad, Telangana</p>
+    </div>
+  </div>
+</section>
+<%- include('partials/footer') %>

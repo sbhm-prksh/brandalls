@@ -1,0 +1,56 @@
+<%- include('../partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1><%= product ? 'Edit Medicine' : 'Add Medicine' %></h1>
+    <p>Keep catalogue details accurate and up to date.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <form class="form-card" method="post" enctype="multipart/form-data" action="<%= product ? '/admin/products/' + product.id + '/edit' : '/admin/products/new' %>">
+      <label>
+        Medicine Name
+        <input type="text" name="name" value="<%= product ? product.name : '' %>" required />
+      </label>
+      <label>
+        Brand
+        <input type="text" name="brand" value="<%= product ? product.brand : '' %>" required />
+      </label>
+      <label>
+        Category
+        <input type="text" name="category" value="<%= product ? product.category : '' %>" required />
+      </label>
+      <label>
+        Description
+        <textarea name="description" rows="4" required><%= product ? product.description : '' %></textarea>
+      </label>
+      <div class="form-grid">
+        <label>
+          Price (₹)
+          <input type="number" step="0.01" name="price" value="<%= product ? product.price : '' %>" required />
+        </label>
+        <label>
+          Stock Quantity
+          <input type="number" name="stock_qty" value="<%= product ? product.stock_qty : '' %>" required />
+        </label>
+        <label>
+          Expiry Date
+          <input type="date" name="expiry_date" value="<%= product ? product.expiry_date : '' %>" required />
+        </label>
+      </div>
+      <label>
+        Product Image
+        <input type="file" name="image" accept="image/*" />
+      </label>
+      <% if (product && product.image_path) { %>
+        <input type="hidden" name="current_image" value="<%= product.image_path %>" />
+        <div class="image-preview">
+          <img src="<%= product.image_path %>" alt="<%= product.name %>" />
+        </div>
+      <% } %>
+      <button class="btn" type="submit"><%= product ? 'Update Medicine' : 'Add Medicine' %></button>
+    </form>
+  </div>
+</section>
+<%- include('../partials/footer') %>

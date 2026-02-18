@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+<section class="page-hero">
+  <div class="container">
+    <h1>Medicines Catalogue</h1>
+    <p>Browse and order medicines in bulk. Use search to find by name, brand, or category.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <form class="search-bar" method="get" action="/medicines">
+      <input type="text" name="search" placeholder="Search medicines" value="<%= search %>" />
+      <button class="btn btn-small" type="submit">Search</button>
+    </form>
+
+    <div class="product-grid">
+      <% if (products.length === 0) { %>
+        <p>No medicines found.</p>
+      <% } %>
+      <% products.forEach(product => { %>
+        <div class="product-card">
+          <div class="product-image">
+            <% if (product.image_path) { %>
+              <img src="<%= product.image_path %>" alt="<%= product.name %>" />
+            <% } else { %>
+              <div class="placeholder">BB</div>
+            <% } %>
+          </div>
+          <div class="product-body">
+            <h3><%= product.name %></h3>
+            <p class="muted"><%= product.brand %> • <%= product.category %></p>
+            <p><%= product.description %></p>
+            <div class="product-meta">
+              <span>₹<%= product.price.toFixed(2) %></span>
+              <span>Stock: <%= product.stock_qty %></span>
+            </div>
+            <% if (user && user.role !== 'admin') { %>
+              <form method="post" action="/cart/add" class="inline-form">
+                <input type="hidden" name="product_id" value="<%= product.id %>" />
+                <input type="number" name="quantity" min="1" value="1" />
+                <button class="btn btn-small" type="submit">Add to Cart</button>
+              </form>
+            <% } else if (!user) { %>
+              <div class="notice">Login to place orders.</div>
+            <% } %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<%- include('partials/footer') %>
