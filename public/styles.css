@@ -654,43 +654,6 @@ a {
   font-size: 14px;
 }
 
-body.admin {
-  background: linear-gradient(180deg, #0b1f38 0%, #0a1629 100%);
-  color: var(--white);
-}
-
-body.admin .site-header {
-  background: rgba(6, 20, 40, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-body.admin .nav-links a {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-body.admin .nav-links a:hover {
-  color: var(--blue-200);
-}
-
-body.admin .card,
-body.admin .table-card,
-body.admin .form-card,
-body.admin .info-box,
-body.admin .order-summary,
-body.admin .product-card {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--white);
-}
-
-body.admin .page-hero,
-body.admin .section-alt {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-body.admin .site-footer {
-  background: #061428;
-}
 
 @media (max-width: 900px) {
   .hero-grid {
